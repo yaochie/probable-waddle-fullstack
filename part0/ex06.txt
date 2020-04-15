@@ -1,0 +1,16 @@
+note over browser:
+user types something in the text
+field and clicks "Save"
+end note
+
+note over browser:
+Add new note to local list of notes
+and redraws the list of notes
+end note
+
+note over browser:
+Convert note to JSON to send to server
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+server-->browser: 201 Created with body {'message': 'note created'}
