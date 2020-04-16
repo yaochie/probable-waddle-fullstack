@@ -14,10 +14,10 @@ const Total = ({ course }) => {
   ) 
 }
 
-const Part = (props) => {
+const Part = ({ part }) => {
   return (
     <p>
-      {props.part.name} {props.part.exercises}
+      {part.name} {part.exercises}
     </p>    
   )
 }
@@ -25,9 +25,7 @@ const Part = (props) => {
 const Content = ({ parts }) => {
   return (
     <div>
-      <Part part={parts[0]} />
-      <Part part={parts[1]} />
-      <Part part={parts[2]} />
+      {parts.map(part => <Part key={part.id} part={part} />)}
     </div>
   )
 }
@@ -60,6 +58,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Debugging',
+        exercises: 5,
+        id: 4
       }
     ]
   }
