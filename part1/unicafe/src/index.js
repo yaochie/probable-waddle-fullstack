@@ -14,6 +14,10 @@ const Statistics = ({ good, neutral, bad }) => {
   const average = (good - bad) / n_collected
   const pos_percent = good / n_collected * 100
 
+  if (n_collected === 0) {
+    return <div>No feedback given</div>
+  }
+
   return (
     <>
       <div>good {good}</div>
