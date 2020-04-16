@@ -9,6 +9,8 @@ const Button = ({ handleClick, text}) => (
   </button>
 )
 
+const Statistic = ({ text, value }) => <div>{text} {value}</div>
+
 const Statistics = ({ good, neutral, bad }) => {
   const n_collected = good + bad + neutral
   const average = (good - bad) / n_collected
@@ -20,12 +22,12 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <>
-      <div>good {good}</div>
-      <div>neutral {neutral}</div>
-      <div>bad {bad}</div>
-      <div>all {n_collected}</div>
-      <div>average {average}</div>
-      <div>positive {pos_percent} %</div>
+      <Statistic text="good" value={good} />
+      <Statistic text="neutral" value={neutral} />
+      <Statistic text="bad" value={bad} />
+      <Statistic text="all" value={n_collected} />
+      <Statistic text="average" value={average} />
+      <Statistic text="positive" value={pos_percent + "%"} />
     </>
   )
 }
