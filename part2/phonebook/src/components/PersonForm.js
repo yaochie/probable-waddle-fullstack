@@ -1,4 +1,5 @@
 import React from 'react'
+import personService from '../services/persons.js'
 
 const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
   const addPerson = (event) => {
@@ -15,9 +16,12 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
       number: newNumber
     }
 
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber('')
+    personService.addPerson(personObject)
+      .then(person => {
+        setPersons(persons.concat(personObject))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   const handleNameChange = (event) => {
@@ -44,3 +48,4 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
 }
 
 export default PersonForm
+
