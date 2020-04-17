@@ -7,7 +7,6 @@ const Numbers = ({ persons, search }) => {
 
   return (
     <>
-      <h2>Numbers</h2>
       {personsToShow.map(person => 
         <div key={person.name}>{person.name} {person.number}</div>
       )}
