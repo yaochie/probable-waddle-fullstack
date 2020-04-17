@@ -2,12 +2,30 @@ import React from 'react'
 import personService from '../services/persons.js'
 
 const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
+
+  const updatePhone = (personObject) => {
+    personService.updatePhone(personObject)
+      .then(newPerson => {
+        setPersons(persons.map(person => {
+          return person.id !== newPerson.id ? person : newPerson
+        }))
+      })
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
 
     // prevent duplicate people
-    if (persons.map(person => person.name).includes(newName)) {
-      alert(`${newName} is already added to phonebook`)
+    const entry = persons.find(person => person.name === newName)
+    if (entry !== undefined) {
+      const confirmString = `${entry.name} is already in phonebook.`
+        + " Replace the old number with a new one?"
+
+      if (window.confirm(confirmString)) {
+        const personObject = { ...entry, number: newNumber }
+        updatePhone(personObject)
+      }
+
       return
     }
 
