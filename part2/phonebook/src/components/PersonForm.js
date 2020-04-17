@@ -18,7 +18,7 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
 
     personService.addPerson(personObject)
       .then(person => {
-        setPersons(persons.concat(personObject))
+        setPersons(persons.concat(person))
         setNewName('')
         setNewNumber('')
       })
