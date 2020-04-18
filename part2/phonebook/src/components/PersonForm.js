@@ -1,7 +1,15 @@
 import React from 'react'
 import personService from '../services/persons.js'
 
-const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
+const PersonForm = ({
+    newName,
+    setNewName,
+    newNumber,
+    setNewNumber,
+    persons,
+    setPersons,
+    setMessage
+  }) => {
 
   const updatePhone = (personObject) => {
     personService.updatePhone(personObject)
@@ -9,6 +17,9 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
         setPersons(persons.map(person => {
           return person.id !== newPerson.id ? person : newPerson
         }))
+
+        setMessage(`Updated ${newPerson.name}'s number`)
+        setTimeout(() => setMessage(null), 5000)
       })
   }
 
@@ -39,6 +50,9 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
         setPersons(persons.concat(person))
         setNewName('')
         setNewNumber('')
+
+        setMessage(`Added ${person.name}`)
+        setTimeout(() => setMessage(null), 5000)
       })
   }
 
