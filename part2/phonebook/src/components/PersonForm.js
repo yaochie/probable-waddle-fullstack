@@ -8,7 +8,8 @@ const PersonForm = ({
     setNewNumber,
     persons,
     setPersons,
-    setMessage
+    setMessage,
+    setError
   }) => {
 
   const updatePhone = (personObject) => {
@@ -18,8 +19,13 @@ const PersonForm = ({
           return person.id !== newPerson.id ? person : newPerson
         }))
 
-        setMessage(`Updated ${newPerson.name}'s number`)
+        setMessage(`Updated ${newPerson.name}'s number to ${newPerson.number}`)
         setTimeout(() => setMessage(null), 5000)
+      })
+      .catch(error => {
+        setError(`${personObject.name} has already been deleted`)
+        setTimeout(() => setError(null), 5000)
+        setPersons(persons.filter(p => p.id !== personObject.id))
       })
   }
 

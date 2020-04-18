@@ -7,7 +7,7 @@ const DeleteButton = ({ handleClick }) => {
   )
 }
 
-const Numbers = ({ persons, setPersons, search }) => {
+const Numbers = ({ persons, setPersons, search, setError }) => {
   const personsToShow = (search === "")
     ? persons
     : persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()))
@@ -17,6 +17,12 @@ const Numbers = ({ persons, setPersons, search }) => {
       personService
         .deletePerson(person.id)
         .then(() => setPersons(persons.filter(p => p.id !== person.id)))
+        .catch(error => {
+          setError(`${person.name} has already been deleted`)
+            
+          setTimeout(() => setError(null), 5000)
+          setPersons(persons.filter(p => p.id !== person.id))
+        })
     }
   }
 
